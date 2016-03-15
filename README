@@ -1,3 +1,5 @@
+npm install安装react-native，然后就可以用react-native run-ios测试例子。
+
 # 第一节
 学习props和state
 
