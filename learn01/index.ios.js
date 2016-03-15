@@ -29,13 +29,13 @@ class HelloComponent extends React.Component{
       };
     }
     _setText() {
-      console.log(this.setState);
       this.setState({appendText: ' Native!'});
     }
     render() {
        return (
          <View>
-           <Text onPress={ ()=> this.setState({appendText:'xxx'})}>
+           <Text onPress={ ()=> this.setState({appendText:' Native!'})}>
+          //  <Text onPress={ this._setText.bind(this) }>
                {this.props.text + this.state.appendText}
            </Text>
          </View>
