@@ -8,12 +8,24 @@ export default class NoteScreen extends React.Component {
      render () {
        return (
          <View style={styles.container}>
-            <TextInput ref="title"
-                autoFocus={true}
-                placeholder="Untitled"
-                onEndEditing={ (text)=>{ this.refs.body.focus() } }
-                style={ styles.title} />
-            <TextInput ref="body" placeholder="Start typing" multiline={true} style={ styles.body} />
+            <View style={styles.inputContainer}>
+              <TextInput
+                  ref="title"
+                  autoFocus={true}
+                  placeholder="Untitled"
+                  onEndEditing={ (text)=>{ this.refs.body.focus() } }
+                  style={ [styles.textinput,styles.title] }
+              />
+            </View>
+            <View style={[styles.inputContainer, styles.bodyFlex]}>
+              <TextInput
+                  ref="body"
+                  placeholder="Start typing"
+                  multiline={true}
+                  textAlignVertical="top"
+                  underlineColorAndroid="transparent"
+                  style={ [styles.textinput,styles.body] } />
+            </View>
          </View>
        );
     }
@@ -21,14 +33,24 @@ export default class NoteScreen extends React.Component {
 var styles = StyleSheet.create({
      container: {
        flex: 1,
-       justifyContent: 'center',
-       alignItems: 'center',
        marginTop: 64
      },
      title: {
        height: 40
      },
      body: {
-       flex:1
+       flex:1,
+     },
+     textInput: {
+       flex:1,
+       fontSize: 16
+     },
+     inputContainer: {
+       margin: 20,
+       borderBottomColor: '#9E7CE3',
+       borderBottomWidth: 1,
+     },
+     bodyFlex: {
+       flex: 1
      }
  });

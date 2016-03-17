@@ -1,1 +1,5 @@
 react-native run-ios 启动，安卓还未测试。
+
+注意点：
+1. iphone要连接数据线，并且和Mac同一个网络。
+2. 把AppDelegate.m的ip改成你Mac的ip。

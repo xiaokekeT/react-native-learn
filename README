@@ -4,4 +4,13 @@ npm install安装依赖，然后就可以用react-native run-ios测试例子。
 学习props和state
 
 #第二节
-学习如何跳转界面
+学习如何跳转界面，加样式等
+
+#第三节
+学习如何展示和存储数据
+
+遇到的坑
+
+1. 如果有使用hosts切换的工具，AppDelegate.m 里面的localhost是不能访问到。在hosts加多一条127.0.0.1到localhost的映射。
+2. navigator push传参，使用 route。 <Xcomponent {...route.params} />
+3. 箭头函数vs bind函数。在react native中因为它使用了babel，我们可以尽情使用arrow function，但是请了解它的原理。

@@ -10,7 +10,8 @@ import React, {
   StyleSheet,
   Text,
   View,
-  Navigator
+  Navigator,
+  StatusBarIOS,
 } from 'react-native';
 
 import SimpleButton from './Components/SimpleButton';
@@ -25,6 +26,8 @@ var NavigationBarRouteMapper = {
              <SimpleButton
                onPress={() => navigator.pop()}
                customText='Back'
+               style={styles.navBarLeftButton}
+               textStyle={styles.navBarButtonText}
               />
             );
         default:
@@ -42,6 +45,8 @@ var NavigationBarRouteMapper = {
                   });
                 }}
                 customText='Create Note'
+                style={styles.navBarRightButton}
+                textStyle={styles.navBarButtonText}
               />
             );
             break;
@@ -53,23 +58,27 @@ var NavigationBarRouteMapper = {
        switch (route.name) {
          case 'home':
            return (
-             <Text>React Notes</Text>
+             <Text style={styles.navBarTitleText}>React Notes</Text>
            );
            break;
          case 'createNote':
            return(
-             <Text>Create Note</Text>
+             <Text style={styles.navBarTitleText}>Create Note</Text>
            );
            return;
        }
      }
 };
 class learn02 extends Component {
+  constructor(props) {
+    super(props);
+    StatusBarIOS.setStyle('light-content');
+  }
   renderScene(route, navigator) {
     switch (route.name) {
        case 'home':
          return (
-            <HomeScreen />
+            <HomeScreen navigator= { navigator}/>
         );
        case 'createNote':
          return (
@@ -85,6 +94,7 @@ class learn02 extends Component {
          navigationBar={
            <Navigator.NavigationBar
             routeMapper={NavigationBarRouteMapper}
+            style={ styles.navBar }
            />
          }
       />
@@ -96,10 +106,30 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    
+    alignItems: 'center'
   },
-
+  navBar: {
+    backgroundColor: '#5B29C1',
+    borderBottomColor: '#48209A',
+    borderBottomWidth: 1
+  },
+  navBarTitleText: {
+    color: '#FFF',
+    fontSize:16,
+    fontWeight: '500',
+    marginVertical: 9
+  },
+  navBarLeftButton: {
+    paddingLeft: 10
+  },
+  navBarRightButton: {
+    paddingRight: 10
+  },
+  navBarButtonText: {
+    color: '#EEE',
+    fontSize: 16,
+    marginVertical:10
+  }
 });
 
 AppRegistry.registerComponent('learn02', () => learn02);
