@@ -1,58 +1,53 @@
 import React, {
-  StyleSheet,
-  Text,
-  View,
-  ListView,
-  TouchableHighlight
+    StyleSheet,
+    Text,
+    View,
+    ListView,
+    TouchableHighlight
 } from 'react-native';
 
 export default class NoteList extends React.Component {
 
-  constructor (props) {
-    super(props);
-    this.ds = new ListView.DataSource({
-      rowHasChanged: (r1,r2) => {
-        r1 !== r2;
-      }
-    });
+    constructor(props) {
+        super(props);
+        this.ds = new ListView.DataSource({
+            rowHasChanged: (r1, r2) =>
+            r1 !== r2
+        });
 
-  }
+    }
 
-  _onPress(rowData) {
-
-    const note = {
-      id: rowData.id,
-      title: rowData.title,
-      body: rowData.body
-    };
-
-    this.props.navigator.push({
-      name: 'createNote',
-      params: note
-    });
-
-  }
-
-  render() {
-    return (
-      <ListView
-        dataSource={
-          this.ds.cloneWithRows([
-            { title: 'Note 1', body: 'Body 1', id: 1},
-            { title: 'Note 2', body: 'Body 2', id: 2},
-          ])
-        }
-        renderRow={
-          (rowData) => {
-            return (
-              <TouchableHighlight
-                onPress={ ()=>this._onPress(rowData) } >
-                <Text> { rowData.title } </Text>
-              </TouchableHighlight>
-            )
-          }
-        }
-        />
-    );
-  }
+    render() {
+        return (
+            <ListView
+                dataSource={
+                  this.ds.cloneWithRows( this.props.notes )
+                }
+                renderRow={
+                  (rowData) => {
+                    return (
+                      <TouchableHighlight
+                        onPress={() => this.props.onSelectNote(rowData)}
+                        style={styles.rowStyle}
+                        underlayColor="#9E7CE3"
+                      >
+                        <Text> { rowData.title } </Text>
+                      </TouchableHighlight>
+                    );
+                  }
+                }
+            />
+        );
+    }
 }
+
+var styles = StyleSheet.create({
+    rowStyle: {
+        borderBottomColor: '#9E7CE3',
+        borderBottomWidth: 1,
+        padding: 20,
+    },
+    rowText: {
+        fontWeight: '600'
+    }
+});

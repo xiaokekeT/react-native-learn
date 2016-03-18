@@ -11,13 +11,13 @@ import React, {
   Text,
   View,
   Navigator,
-  StatusBarIOS,
+  StatusBarIOS
 } from 'react-native';
 
 import SimpleButton from './Components/SimpleButton';
 import NoteScreen from './Components/NoteScreen';
 import HomeScreen from './Components/HomeScreen';
-
+import _ from 'lodash';
 var NavigationBarRouteMapper = {
      LeftButton: function(route, navigator, index, navState) {
        switch (route.name) {
@@ -69,37 +69,59 @@ var NavigationBarRouteMapper = {
        }
      }
 };
-class learn03 extends Component {
-  constructor(props) {
-    super(props);
-    StatusBarIOS.setStyle('light-content');
-  }
-  renderScene(route, navigator) {
-    switch (route.name) {
-       case 'home':
-         return (
-            <HomeScreen navigator= { navigator } />
-        );
-       case 'createNote':
-         return (
-             <NoteScreen { ...route.params} />
-         );
-     }
-  }
-  render() {
-    return (
-      <Navigator
-         initialRoute={{name: 'home'}}
-         renderScene={this.renderScene}
-         navigationBar={
-           <Navigator.NavigationBar
-            routeMapper={NavigationBarRouteMapper}
-            style={ styles.navBar }
-           />
+class learn03 extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+          selectedNote: { title: '', body: ''},
+          notes: {
+              1: {title: 'Note 1', body: 'Body 1', id: 1},
+              2: {title: 'Note 2', body: 'Body 2', id: 2}
+          }
+      };
+      StatusBarIOS.setStyle('light-content');
+    }
+
+    updateNote(note) {
+        var newNotes = Object.assign({}, this.state.notes);
+        newNotes[note.id] = note;
+        this.setState({notes:newNotes});
+    }
+
+    renderScene(route, navigator) {
+        switch (route.name) {
+           case 'home':
+             return (
+                <HomeScreen
+                    navigator= { navigator }
+                    notes= { _.toArray(this.state.notes)  }
+                    onSelectNote={ (note) => navigator.push({name:"createNote", note: note}) }
+                />
+            );
+           case 'createNote':
+             return (
+                 <NoteScreen
+                     note={this.state.selectedNote}
+                     onChangeNote={(note) => this.updateNote(note)}
+                 />
+             );
          }
-      />
-    );
-  }
+    }
+
+    render() {
+        return (
+          <Navigator
+             initialRoute={{name: 'home'}}
+             renderScene={ this.renderScene.bind(this) }
+             navigationBar={
+               <Navigator.NavigationBar
+                routeMapper={NavigationBarRouteMapper}
+                style={ styles.navBar }
+               />
+             }
+          />
+        );
+    }
 }
 
 const styles = StyleSheet.create({
