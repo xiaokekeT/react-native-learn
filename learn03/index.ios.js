@@ -101,7 +101,7 @@ class learn03 extends React.Component {
            case 'createNote':
              return (
                  <NoteScreen
-                     note={this.state.selectedNote}
+                     note={route.note || this.state.selectedNote}
                      onChangeNote={(note) => this.updateNote(note)}
                  />
              );

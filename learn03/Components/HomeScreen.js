@@ -15,8 +15,8 @@ export default class HomeScreen extends React.Component {
         return (
             <View style={styles.container}>
                 <NoteList
-                        onSelectNote={this.props.onSelectNote}
-                        notes = { this.props.notes }
+                    onSelectNote={this.props.onSelectNote}
+                    notes = { this.props.notes }
                 />
                 <Text style={styles.noNotesText}>
                     You haven't create any notes!
@@ -35,9 +35,10 @@ export default class HomeScreen extends React.Component {
 var styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor:'#999',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 60
+        marginTop: 60,
     },
     noNotesText: {
         color: '#48209A',
