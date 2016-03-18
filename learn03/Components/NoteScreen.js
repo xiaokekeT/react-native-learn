@@ -17,8 +17,8 @@ export default class NoteScreen extends React.Component {
          title,
          body
        });
-       this.props.onChangeNote(note);
        this.setState(note);
+      this.props.onChangeNote(note);
     }
 
     render() {
@@ -53,26 +53,29 @@ export default class NoteScreen extends React.Component {
 }
 var styles = StyleSheet.create({
     container: {
-        flex: 1,
-        marginTop: 64
+      flex: 1,
+      marginTop: 64
     },
     title: {
-        height: 40
+      height: 40
     },
     body: {
-        flex: 1
+      flex: 1
     },
     textInput: {
-        flex: 1,
-        backgroundColor: '#F60',
-        fontSize: 16
+      flex: 1,
+      backgroundColor: "#F60",
+      fontSize: 16
     },
     inputContainer: {
-        margin: 20,
-        borderBottomColor: '#9E7CE3',
-        borderBottomWidth: 1
+      borderBottomColor: "#9E7CE3",
+      borderBottomWidth: 1,
+      marginLeft: 10,
+      marginTop: 10,
+      marginLeft: 10
     },
     bodyFlex: {
-        flex: 1
+      padding: 5,
+      flex: 1
     }
 });
