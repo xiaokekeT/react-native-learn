@@ -73,7 +73,7 @@ class learn03 extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-          selectedNote: { title: '', body: ''},
+          selectedNote: { title: '', body: '', id: ''},
           notes: {
               1: {title: 'Note 1', body: 'Body 1', id: 1},
               2: {title: 'Note 2', body: 'Body 2', id: 2}
